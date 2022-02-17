@@ -1,44 +1,39 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ProductsApi.Data;
 using ProductsApi.Models;
-using Microsoft.AspNetCore.Authorization;
+using ProductsApi.Services;
 
 namespace ProductsApi.Controllers
 {
     [ApiController]
     [Route("v1/categories")]
-
     public class CategoryController : ControllerBase
     {
+        private CategoryService _service;
+        public CategoryController([FromServices] DataContext context) => _service = new CategoryService(context);
+
+
         [HttpGet]
         [Route("")]
-
-        public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext context)
+        public async Task<ActionResult<List<Category>>> Get()
         {
-            var categories = await context.Categories.ToListAsync();
-            return categories;
+            var response = await _service.GetCategoriesList();
+            return response;
         }
 
         [HttpPost]
         [Route("")]
-
-        public async Task<ActionResult<Category>> Post(
-            [FromServices] DataContext context,
-            [FromBody] Category category)
+        public async Task<ActionResult<Category>> Post([FromBody] Category request)
         {
-            if (ModelState.IsValid)
-            {
-                context.Categories.Add(category);
-                await context.SaveChangesAsync();
-                return category;
-            }
-            else
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            var response = await _service.SetCategory(request);
+            return response;
         }
     }
 }
