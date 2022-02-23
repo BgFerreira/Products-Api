@@ -8,12 +8,14 @@ using ProductsApi.Models;
 
 namespace ProductsApi.Repositories
 {
-    public class ProductSource
+    public class ProductRepository
     {
         private DataContext _context;
-        public ProductSource(DataContext context) => _context = context;
+        
+        public ProductRepository(DataContext context) => _context = context;
 
-        public async Task<ActionResult<List<Product>>> GetProductsList()
+        
+        public async Task<ActionResult<List<Product>>> GetAll()
         {
             var products = await _context.Products
                 .Include(x => x.Category)
@@ -21,7 +23,7 @@ namespace ProductsApi.Repositories
             return products;
         }
 
-        public async Task<ActionResult<Product>> GetProductById(int id)
+        public async Task<ActionResult<Product>> GetById(int id)
         {
             var product = await _context.Products
                 .Include(x => x.Category)
@@ -30,7 +32,7 @@ namespace ProductsApi.Repositories
             return product;
         }
 
-        public async Task<ActionResult<List<Product>>> GetProductsByCategory(int id)
+        public async Task<ActionResult<List<Product>>> GetByCategory(int id)
         {
             var products = await _context.Products
                 .Include(x => x.Category)
@@ -40,11 +42,14 @@ namespace ProductsApi.Repositories
             return products;
         }
 
-        public async Task<ActionResult<Product>> SetProduct(Product product)
+        public async Task<ActionResult<Product>> Add(Product product)
         {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
-            return product;
+            var productAdded = _context.Products
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == product.Id);
+            return await productAdded;
         }
     }
 }
