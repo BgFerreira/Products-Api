@@ -12,14 +12,15 @@ namespace ProductsApi.Controllers
     public class CategoryController : ControllerBase
     {
         private CategoryService _service;
+
         public CategoryController([FromServices] DataContext context) => _service = new CategoryService(context);
 
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Category>>> Get()
+        public async Task<ActionResult<List<Category>>> GetAll()
         {
-            var response = await _service.GetCategoriesList();
+            var response = await _service.GetAll();
             return response;
         }
 
@@ -32,7 +33,7 @@ namespace ProductsApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var response = await _service.SetCategory(request);
+            var response = await _service.Add(request);
             return response;
         }
     }

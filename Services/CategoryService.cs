@@ -9,18 +9,20 @@ namespace ProductsApi.Services
 {
     public class CategoryService
     {
-        private CategorySource _source;
-        public CategoryService(DataContext context) => _source = new CategorySource(context);
+        private CategoryRespository _respository;
+        
+        public CategoryService(DataContext context) => _respository = new CategoryRespository(context);
+        
 
-        public async Task<ActionResult<List<Category>>> GetCategoriesList()
+        public async Task<ActionResult<List<Category>>> GetAll()
         {
-            var categories = await _source.GetCategoriesList();
+            var categories = await _respository.GetAll();
             return categories;
         }
 
-        public async Task<ActionResult<Category>> SetCategory(Category category)
+        public async Task<ActionResult<Category>> Add(Category category)
         {
-            var result = await _source.SetCategory(category);
+            var result = await _respository.Add(category);
             return result;
         }
     }

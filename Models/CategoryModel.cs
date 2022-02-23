@@ -7,9 +7,9 @@ namespace ProductsApi.Models
         [Key]
         public int Id { get; set; }
         
-        [Required(ErrorMessage = "Este campo é obrigatório")]
-        [MaxLength(60, ErrorMessage = "Este campo deve conter entre 3 a 60 caracteres")]
-        [MinLength(3, ErrorMessage = "Este campo deve conter entre 3 a 60 caracteres")]
+        [Required(ErrorMessage = "O campo title é obrigatório")]
+        [MaxLength(60, ErrorMessage = "O campo title deve conter até 60 caracteres")]
+        [MinLength(3, ErrorMessage = "O campo title deve conter pelo menos 3 caracteres")]
         
         public string Title { get; set; }
     }

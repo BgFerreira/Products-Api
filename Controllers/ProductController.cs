@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ProductsApi.Data;
 using ProductsApi.Models;
 using ProductsApi.Services;
@@ -14,14 +12,15 @@ namespace ProductsApi.Controllers
     public class ProductController : ControllerBase
     {
         private ProductService _service;
+        
         public ProductController([FromServices] DataContext context) => _service = new ProductService(context);
-        
-        
+
+
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Product>>> Get()
+        public async Task<ActionResult<List<Product>>> GetAll()
         {
-            var response = await _service.GetProductList();
+            var response = await _service.GetAll();
             return response;
         }
 
@@ -30,7 +29,7 @@ namespace ProductsApi.Controllers
         [Route("{id:int}")]
         public async Task<ActionResult<Product>> GetById(int id)
         {
-            var response = await _service.GetProductById(id);
+            var response = await _service.GetById(id);
             return response;
         }
 
@@ -39,7 +38,7 @@ namespace ProductsApi.Controllers
         [Route("categories/{id:int}")]
         public async Task<ActionResult<List<Product>>> GetByCategory([FromServices] DataContext context, int id)
         {
-            var response = await _service.GetProductsByCategory(id);
+            var response = await _service.GetByCategory(id);
             return response;
         }
 
@@ -53,7 +52,7 @@ namespace ProductsApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var response = await _service.SetProduct(product);
+            var response = await _service.Add(product);
             return response;
         }
     }

@@ -9,30 +9,32 @@ namespace ProductsApi.Services
 {
     public class ProductService
     {
-        private ProductSource _source;
-        public ProductService(DataContext context) => _source = new ProductSource(context);
+        private ProductRepository _repository;
+        
+        public ProductService(DataContext context) => _repository = new ProductRepository(context);
 
-        public async Task<ActionResult<List<Product>>> GetProductList()
+        
+        public async Task<ActionResult<List<Product>>> GetAll()
         {
-            var products = await _source.GetProductsList();
+            var products = await _repository.GetAll();
             return products;
         }
 
-        public async Task<ActionResult<Product>> GetProductById(int id)
+        public async Task<ActionResult<Product>> GetById(int id)
         {
-            var product = await _source.GetProductById(id);
+            var product = await _repository.GetById(id);
             return product;
         }
 
-        public async Task<ActionResult<List<Product>>> GetProductsByCategory(int id)
+        public async Task<ActionResult<List<Product>>> GetByCategory(int id)
         {
-            var products = await _source.GetProductsByCategory(id);
+            var products = await _repository.GetByCategory(id);
             return products;
         }
 
-        public async Task<ActionResult<Product>> SetProduct(Product product)
+        public async Task<ActionResult<Product>> Add(Product product)
         {
-            var result = await _source.SetProduct(product);
+            var result = await _repository.Add(product);
             return result;
         }
     }
