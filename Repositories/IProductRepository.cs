@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ProductsApi.Data;
 using ProductsApi.Models;
 
-namespace ProductsApi.Interfaces
+namespace ProductsApi.Repositories
 {
-    public interface ProductsInterface
+    public interface IProductRepository
     {
         Task<ActionResult<List<Product>>> GetAll();
         Task<ActionResult<Product>> GetById(int id);

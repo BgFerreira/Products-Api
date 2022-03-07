@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ProductsApi.Data;
 using ProductsApi.Models;
 
-namespace ProductsApi.Interfaces
+namespace ProductsApi.Repositories
 {
-    public interface CategoryInteface
-    { 
+    public interface ICategoryRepository
+    {
         Task<ActionResult<List<Category>>> GetAll();
-        Task<ActionResult<Category>> Add();
+        Task<ActionResult<Category>> Add(Category category);
     }
 }

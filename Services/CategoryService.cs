@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ProductsApi.Data;
 using ProductsApi.Models;
 using ProductsApi.Repositories;
 
 namespace ProductsApi.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
-        private CategoryRespository _respository;
+        private ICategoryRepository _respository;
         
-        public CategoryService(DataContext context) => _respository = new CategoryRespository(context);
+        public CategoryService(ICategoryRepository repository) => _respository = repository;
         
 
         public async Task<ActionResult<List<Category>>> GetAll()

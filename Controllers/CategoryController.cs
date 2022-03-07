@@ -11,9 +11,9 @@ namespace ProductsApi.Controllers
     [Route("v1/categories")]
     public class CategoryController : ControllerBase
     {
-        private CategoryService _service;
+        private ICategoryService _service;
 
-        public CategoryController([FromServices] DataContext context) => _service = new CategoryService(context);
+        public CategoryController(ICategoryService service) => _service = service;
 
 
         [HttpGet]

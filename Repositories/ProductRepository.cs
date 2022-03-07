@@ -8,7 +8,7 @@ using ProductsApi.Models;
 
 namespace ProductsApi.Repositories
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private DataContext _context;
         

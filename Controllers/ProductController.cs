@@ -11,9 +11,9 @@ namespace ProductsApi.Controllers
     [Route("v1/products")]
     public class ProductController : ControllerBase
     {
-        private ProductService _service;
-        
-        public ProductController([FromServices] DataContext context) => _service = new ProductService(context);
+        private IProductService _service;
+
+        public ProductController(IProductService service) => _service = service;
 
 
         [HttpGet]
