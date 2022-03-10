@@ -1,0 +1,86 @@
+diff --git a/ProductsApi.sln b/ProductsApi.sln
+new file mode 100644
+index 0000000..4967ab6
+--- /dev/null
++++ b/ProductsApi.sln
+@@ -0,0 +1,16 @@
++﻿
++Microsoft Visual Studio Solution File, Format Version 12.00
++Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsApi", "ProductsApi/ProductsApi.csproj", "{8FFBF2D0-BC0F-4DC1-9FAB-A5694F9C9038}"
++EndProject
++Global
++	GlobalSection(SolutionConfigurationPlatforms) = preSolution
++		Debug|Any CPU = Debug|Any CPU
++		Release|Any CPU = Release|Any CPU
++	EndGlobalSection
++	GlobalSection(ProjectConfigurationPlatforms) = postSolution
++		{8FFBF2D0-BC0F-4DC1-9FAB-A5694F9C9038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
++		{8FFBF2D0-BC0F-4DC1-9FAB-A5694F9C9038}.Debug|Any CPU.Build.0 = Debug|Any CPU
++		{8FFBF2D0-BC0F-4DC1-9FAB-A5694F9C9038}.Release|Any CPU.ActiveCfg = Release|Any CPU
++		{8FFBF2D0-BC0F-4DC1-9FAB-A5694F9C9038}.Release|Any CPU.Build.0 = Release|Any CPU
++	EndGlobalSection
++EndGlobal
+diff --git a/Controllers/CategoryController.cs b/ProductsApi/Controllers/CategoryController.cs
+similarity index 100%
+rename from Controllers/CategoryController.cs
+rename to ProductsApi/Controllers/CategoryController.cs
+diff --git a/Controllers/ProductController.cs b/ProductsApi/Controllers/ProductController.cs
+similarity index 100%
+rename from Controllers/ProductController.cs
+rename to ProductsApi/Controllers/ProductController.cs
+diff --git a/Data/DataContext.cs b/ProductsApi/Data/DataContext.cs
+similarity index 100%
+rename from Data/DataContext.cs
+rename to ProductsApi/Data/DataContext.cs
+diff --git a/Models/CategoryModel.cs b/ProductsApi/Models/CategoryModel.cs
+similarity index 100%
+rename from Models/CategoryModel.cs
+rename to ProductsApi/Models/CategoryModel.cs
+diff --git a/Models/ProductModel.cs b/ProductsApi/Models/ProductModel.cs
+similarity index 100%
+rename from Models/ProductModel.cs
+rename to ProductsApi/Models/ProductModel.cs
+diff --git a/ProductsApi.csproj b/ProductsApi/ProductsApi.csproj
+similarity index 100%
+rename from ProductsApi.csproj
+rename to ProductsApi/ProductsApi.csproj
+diff --git a/Program.cs b/ProductsApi/Program.cs
+similarity index 100%
+rename from Program.cs
+rename to ProductsApi/Program.cs
+diff --git a/Properties/launchSettings.json b/ProductsApi/Properties/launchSettings.json
+similarity index 100%
+rename from Properties/launchSettings.json
+rename to ProductsApi/Properties/launchSettings.json
+diff --git a/README.md b/ProductsApi/README.md
+similarity index 100%
+rename from README.md
+rename to ProductsApi/README.md
+diff --git a/Repositories/CategoryRepository.cs b/ProductsApi/Repositories/CategoryRepository.cs
+similarity index 100%
+rename from Repositories/CategoryRepository.cs
+rename to ProductsApi/Repositories/CategoryRepository.cs
+diff --git a/Repositories/ProductRepository.cs b/ProductsApi/Repositories/ProductRepository.cs
+similarity index 100%
+rename from Repositories/ProductRepository.cs
+rename to ProductsApi/Repositories/ProductRepository.cs
+diff --git a/Services/CategoryService.cs b/ProductsApi/Services/CategoryService.cs
+similarity index 100%
+rename from Services/CategoryService.cs
+rename to ProductsApi/Services/CategoryService.cs
+diff --git a/Services/ProductService.cs b/ProductsApi/Services/ProductService.cs
+similarity index 100%
+rename from Services/ProductService.cs
+rename to ProductsApi/Services/ProductService.cs
+diff --git a/Startup.cs b/ProductsApi/Startup.cs
+similarity index 100%
+rename from Startup.cs
+rename to ProductsApi/Startup.cs
+diff --git a/appsettings.Development.json b/ProductsApi/appsettings.Development.json
+similarity index 100%
+rename from appsettings.Development.json
+rename to ProductsApi/appsettings.Development.json
+diff --git a/appsettings.json b/ProductsApi/appsettings.json
+similarity index 100%
+rename from appsettings.json
+rename to ProductsApi/appsettings.json
