@@ -28,11 +28,6 @@ namespace ProductsApi.Controllers
         [Route("")]
         public async Task<ActionResult<Category>> Post([FromBody] Category request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var response = await _service.Add(request);
             return response;
         }
