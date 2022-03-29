@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Moq;
@@ -11,39 +14,44 @@ namespace ProductsApiTests.RepositoriesTests
     public class CategoryRepositoryTest
     {
         private CategoryRepository _repository;
-        private Mock<DataContext> _context;
+        private DataContext _context;
+        //private Mock<DbSet<Category>> _dbSet;
 
         public CategoryRepositoryTest()
         {
-            var options = new DbContextOptions<DataContext>();
-            _context = new Mock<DataContext>(options);
-            _repository = new CategoryRepository(_context.Object);
+            var options = new DbContextOptionsBuilder<DataContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            _context = new DataContext(options);
+            _repository = new CategoryRepository(_context);
+            //_dbSet = new Mock<DbSet<Category>>();
         }
 
         [Fact]
         public async void GetAllTest()
         {
             //arrange
-            var category = new Category()
+            if (await _context.Categories.CountAsync() <= 0)
             {
-                Id = 1,
-                Title = "teste"
-            };
+                for (int i = 1; i <= 3; i++)
+                { 
+                    _context.Categories.Add(new Category() 
+                    {
+                        Id = i, 
+                        Title = $"Categoria {i}"
+                    });
+                }
+                
+                await _context.SaveChangesAsync();
+            }
             
-            var categoriesMock = new Mock<IDataContext>();
-            var categoriesAddMock = new Mock<DbSet<Category>>();
-            categoriesAddMock.Setup(x => x.Add(It.IsAny<Category>())).Returns(It.IsAny<EntityEntry<Category>>());
-            categoriesMock.Setup(x => x.Categories).Returns(categoriesAddMock.Object);
-
-            //var fakeDbSet = new FakeDbSet<Category>();
-
-
+            var categories = await _context.Categories.ToListAsync();
 
             //act
-            var result = categoriesMock.Object.Categories.Add((category));
+            var result = await _repository.GetAll();
 
             //assert
-            categoriesAddMock.Verify(x => x.Add(category), Times.Exactly(1));
+            result.Value.Should().BeEquivalentTo(categories);
         }
     }
 }

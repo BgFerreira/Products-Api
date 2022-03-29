@@ -23,7 +23,7 @@ namespace ProductsApiTests.ServicesTests
         public async void  GetAllTest()
         {
             //arrange
-            List<Category> categories = new List<Category>()
+            var categories = new List<Category>()
             {
                 new()
                 {
@@ -38,9 +38,9 @@ namespace ProductsApiTests.ServicesTests
                 }
             };
             
-            //act
             _repository.Setup(x => x.GetAll()).ReturnsAsync(categories);
-
+            
+            //act
             var result = await _service.GetAll();
 
             //assert

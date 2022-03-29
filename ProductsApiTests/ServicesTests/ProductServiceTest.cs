@@ -57,8 +57,8 @@ namespace ProductsApiTests.ServicesTests
         public async void GetByIdTest()
         {
             //arrange
-            int id = 1;
-            Product product = new Product()
+            const int id = 1;
+            var product = new Product()
             {
                 Id = 1, 
                 Title = "Produto 1", 
@@ -67,9 +67,9 @@ namespace ProductsApiTests.ServicesTests
                 CategoryId = 1
             };
             
-            //act
             _repository.Setup(x => x.GetById(id)).ReturnsAsync(product);
-
+            
+            //act
             var result = await _service.GetById(id);
 
             //assert
