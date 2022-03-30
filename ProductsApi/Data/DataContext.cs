@@ -14,7 +14,7 @@ namespace ProductsApi.Data
             
         }
 
-        protected DataContext()
+        public DataContext()
         {
             
         }

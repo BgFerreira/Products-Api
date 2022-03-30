@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Moq;
 using ProductsApi.Data;
 using ProductsApi.Models;
 using ProductsApi.Repositories;
@@ -15,16 +12,15 @@ namespace ProductsApiTests.RepositoriesTests
     {
         private CategoryRepository _repository;
         private DataContext _context;
-        //private Mock<DbSet<Category>> _dbSet;
 
         public CategoryRepositoryTest()
         {
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
+            
             _context = new DataContext(options);
             _repository = new CategoryRepository(_context);
-            //_dbSet = new Mock<DbSet<Category>>();
         }
 
         [Fact]
@@ -52,6 +48,23 @@ namespace ProductsApiTests.RepositoriesTests
 
             //assert
             result.Value.Should().BeEquivalentTo(categories);
+        }
+
+        [Fact]
+        public async void AddTest()
+        {
+            //arrange
+            var category = new Category()
+            {
+                Id = 1,
+                Title = "Add Test"
+            };
+            
+            //act
+            var result = await _repository.Add(category);
+
+            //assert
+            result.Value.Should().BeEquivalentTo(category);
         }
     }
 }
