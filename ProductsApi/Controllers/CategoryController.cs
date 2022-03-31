@@ -26,7 +26,7 @@ namespace ProductsApi.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<Category>> Post([FromBody] Category request)
+        public async Task<ActionResult<Category>> Add([FromBody] Category request)
         {
             var response = await _service.Add(request);
             return response;
