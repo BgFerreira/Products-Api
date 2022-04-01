@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +7,11 @@ using ProductsApi.Models;
 
 namespace ProductsApi.Repositories
 {
-    public class CategoryRespository
+    public class CategoryRepository : ICategoryRepository
     {
         private DataContext _context;
         
-        public CategoryRespository(DataContext context) => _context = context;
-        
+        public CategoryRepository(DataContext context) => _context = context;
         
         public async Task<ActionResult<List<Category>>> GetAll()
         {
