@@ -7,11 +7,11 @@ using ProductsApi.Repositories;
 
 namespace ProductsApi.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
-        private ProductRepository _repository;
-        
-        public ProductService(DataContext context) => _repository = new ProductRepository(context);
+        private IProductRepository _repository;
+
+        public ProductService(IProductRepository repository) => _repository = repository;
 
         
         public async Task<ActionResult<List<Product>>> GetAll()

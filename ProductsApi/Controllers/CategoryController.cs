@@ -11,9 +11,9 @@ namespace ProductsApi.Controllers
     [Route("v1/categories")]
     public class CategoryController : ControllerBase
     {
-        private CategoryService _service;
+        private ICategoryService _service;
 
-        public CategoryController([FromServices] DataContext context) => _service = new CategoryService(context);
+        public CategoryController(ICategoryService service) => _service = service;
 
 
         [HttpGet]
@@ -26,13 +26,8 @@ namespace ProductsApi.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<Category>> Post([FromBody] Category request)
+        public async Task<ActionResult<Category>> Add([FromBody] Category request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var response = await _service.Add(request);
             return response;
         }

@@ -11,9 +11,9 @@ namespace ProductsApi.Controllers
     [Route("v1/products")]
     public class ProductController : ControllerBase
     {
-        private ProductService _service;
-        
-        public ProductController([FromServices] DataContext context) => _service = new ProductService(context);
+        private IProductService _service;
+
+        public ProductController(IProductService service) => _service = service;
 
 
         [HttpGet]
@@ -36,7 +36,7 @@ namespace ProductsApi.Controllers
         
         [HttpGet]
         [Route("categories/{id:int}")]
-        public async Task<ActionResult<List<Product>>> GetByCategory([FromServices] DataContext context, int id)
+        public async Task<ActionResult<List<Product>>> GetByCategory(int id)
         {
             var response = await _service.GetByCategory(id);
             return response;
@@ -45,7 +45,7 @@ namespace ProductsApi.Controllers
         
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<Product>> Post([FromBody] Product product)
+        public async Task<ActionResult<Product>> Add([FromBody] Product product)
         {
             if (!ModelState.IsValid)
             {
